@@ -14,9 +14,8 @@ var BootScene = new Phaser.Class({
         // load the resources here
     },
  
-    create: function ()
-    {
-        this.scene.start('WorldScene');
+    create() {
+      this.scene.start('WorldScene');
     }
 });
  
