@@ -1,31 +1,39 @@
 {
   "name": "rpg-game",
   "version": "1.0.0",
-  "description": "A game development",
+  "description": "A web browser game",
   "main": "webpack.config.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {
+    "phaser": "^3.54.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elisha2kyakpo1/RPG-GAME.git"
-  },
-  "author": "Elisha kyakopo",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/elisha2kyakpo1/RPG-GAME/issues"
-  },
-  "homepage": "https://github.com/elisha2kyakpo1/RPG-GAME#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.14.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.0.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
     "stylelint-scss": "^3.19.0",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.1"
-  }
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elisha2kyakpo1/phaser3-game.git"
+  },
+  "author": "Elisha kyakopo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elisha2kyakpo1/phaser3-game/issues"
+  },
+  "homepage": "https://github.com/elisha2kyakpo1/phaser3-game#readme"
 }
