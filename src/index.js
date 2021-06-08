@@ -1,14 +1,13 @@
 import Phaser from 'phaser';
-import BattleScene from './Scene/BattleScene';
+import { BattleScene, UIScene } from './Scene/BattleScene';
 import WorldScene from './Scene/worldScene';
 import BootScene from './Scene/BootScene';
-import UIScene from './Scene/UiScene';
 
 const config = {
   type: Phaser.AUTO,
   parent: 'content',
-  width: 320,
-  height: 240,
+  width: 550,
+  height: 340,
   zoom: 2,
   pixelArt: true,
   physics: {
