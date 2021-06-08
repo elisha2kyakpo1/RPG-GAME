@@ -1,5 +1,67 @@
 import Phaser from 'phaser';
 
+// base class for heroes and enemies
+const Unit = new Phaser.Class({
+  Extends: Phaser.GameObjects.Sprite,
+
+  initialize:
+
+    function Unit(scene, x, y, texture, frame, type, hp, damage) {
+      Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame);
+      this.type = type;
+      this.hp = hp;
+      this.maxHp = this.hp;
+      this.damage = damage; // default damage
+      this.living = true;
+      this.menuItem = null;
+    },
+
+  // we will use this to notify the menu item when the unit is dead
+  setMenuItem(item) {
+    this.menuItem = item;
+  },
+  // attack the target unit
+  attack(target) {
+    if (target.living) {
+      target.takeDamage(this.damage);
+      this.scene.events.emit(`Message, ${this.type} attacks ${target.type} for ${this.damage} damage`);
+    }
+  },
+
+  takeDamage(damage) {
+    this.hp -= damage;
+    if (this.hp <= 0) {
+      this.hp = 0;
+      this.menuItem.unitKilled();
+      this.living = false;
+      this.visible = false;
+      this.menuItem = null;
+    }
+  },
+});
+
+const PlayerCharacter = new Phaser.Class({
+  Extends: Unit,
+
+  initialize:
+  function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage) {
+    Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
+    // flip the image so I don't have to edit it manually
+    this.flipX = true;
+
+    this.setScale(2);
+  },
+});
+
+const Enemy = new Phaser.Class({
+  Extends: Unit,
+
+  initialize:
+    function Enemy(scene, x, y, texture, frame, type, hp, damage) {
+      Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
+    },
+});
+
 const BattleScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
@@ -118,68 +180,6 @@ const BattleScene = new Phaser.Class({
   },
 });
 
-// base class for heroes and enemies
-const Unit = new Phaser.Class({
-  Extends: Phaser.GameObjects.Sprite,
-
-  initialize:
-
-    function Unit(scene, x, y, texture, frame, type, hp, damage) {
-      Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame);
-      this.type = type;
-      this.hp = hp;
-      this.maxHp = this.hp;
-      this.damage = damage; // default damage
-      this.living = true;
-      this.menuItem = null;
-    },
-
-  // we will use this to notify the menu item when the unit is dead
-  setMenuItem(item) {
-    this.menuItem = item;
-  },
-  // attack the target unit
-  attack(target) {
-    if (target.living) {
-      target.takeDamage(this.damage);
-      this.scene.events.emit(`Message, ${this.type} attacks ${target.type} for ${this.damage} damage`);
-    }
-  },
-
-  takeDamage(damage) {
-    this.hp -= damage;
-    if (this.hp <= 0) {
-      this.hp = 0;
-      this.menuItem.unitKilled();
-      this.living = false;
-      this.visible = false;
-      this.menuItem = null;
-    }
-  },
-});
-
-const Enemy = new Phaser.Class({
-  Extends: Unit,
-
-  initialize:
-    function Enemy(scene, x, y, texture, frame, type, hp, damage) {
-      Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
-    },
-});
-
-const PlayerCharacter = new Phaser.Class({
-  Extends: Unit,
-
-  initialize:
-  function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage) {
-    Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
-    // flip the image so I don't have to edit it manually
-    this.flipX = true;
-
-    this.setScale(2);
-  },
-});
-
 const MenuItem = new Phaser.Class({
   Extends: Phaser.GameObjects.Text,
 
@@ -210,7 +210,7 @@ const Menu = new Phaser.Class({
 
   initialize:
 
-  function Menu(x, y, scene, heroes) {
+  function Menu(x, y, scene) {
     Phaser.GameObjects.Container.call(this, scene, x, y);
     this.menuItems = [];
     this.menuItemIndex = 0;
@@ -236,6 +236,7 @@ const Menu = new Phaser.Class({
     } while (!this.menuItems[this.menuItemIndex].active);
     this.menuItems[this.menuItemIndex].select();
   },
+
   moveSelectionDown() {
     this.menuItems[this.menuItemIndex].deselect();
     do {
@@ -286,7 +287,7 @@ const Menu = new Phaser.Class({
   // recreate the menu items
   remap(units) {
     this.clear();
-    for (let i = 0; i < units; i += 1) {
+    for (let i = 0; i < units.length(); i += 1) {
       const unit = units[i];
       unit.setMenuItem(this.addMenuItem(unit.type));
     }
@@ -444,8 +445,6 @@ const UIScene = new Phaser.Class({
         this.currentMenu.moveSelectionUp();
       } else if (event.code === 'ArrowDown') {
         this.currentMenu.moveSelectionDown();
-      } else if (event.code === 'ArrowRight' || event.code === 'Shift') {
-
       } else if (event.code === 'Space' || event.code === 'ArrowLeft') {
         this.currentMenu.confirm();
       }

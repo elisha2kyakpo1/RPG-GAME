@@ -18,7 +18,7 @@ const WorldScene = new Phaser.Class({
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
 
     // creating the layers
-    const grass = map.createStaticLayer('Grass', tiles, 0, 0);
+    map.createStaticLayer('Grass', tiles, 0, 0);
     const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
 
     // make all tiles in obstacles collidable
@@ -103,7 +103,7 @@ const WorldScene = new Phaser.Class({
     this.scene.switch('BattleScene');
   },
 
-  update(time, delta) {
+  update() {
     this.player.body.setVelocity(0);
 
     // Horizontal movement
