@@ -1,27 +1,37 @@
 import Phaser from 'phaser';
 
-export default class WorldScene extends Phaser.Scene {
-  constructor() {
-    super('World');
-  }
+const WorldScene = new Phaser.Class({
+
+  Extends: Phaser.Scene,
+
+  initialize:
+
+    function WorldScene() {
+      Phaser.Scene.call(this, { key: 'WorldScene' });
+    },
 
   create() {
+    // create the map
     const map = this.make.tilemap({ key: 'map' });
 
+    // first parameter is the name of the tilemap in tiled
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
 
+    // creating the layers
     const grass = map.createStaticLayer('Grass', tiles, 0, 0);
     const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
 
+    // make all tiles in obstacles collidable
     obstacles.setCollisionByExclusion([-1]);
 
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13]}),
       frameRate: 10,
-      repeat: -1,
+      repeat: -1
     });
 
+    // animation with key 'right'
     this.anims.create({
       key: 'right',
       frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
@@ -30,64 +40,82 @@ export default class WorldScene extends Phaser.Scene {
     });
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14]}),
       frameRate: 10,
       repeat: -1,
     });
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('player', { frames: [0, 6, 0, 12] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [ 0, 6, 0, 12 ] }),
       frameRate: 10,
       repeat: -1,
     });
 
+    // our player sprite created through the phycis system
     this.player = this.physics.add.sprite(50, 100, 'player', 6);
 
+    // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
     this.player.setCollideWorldBounds(true);
 
+    // don't walk on trees
     this.physics.add.collider(this.player, obstacles);
 
+    // limit camera to map
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = true; // avoid tile bleed
 
+    // user input
     this.cursors = this.input.keyboard.createCursorKeys();
 
+    // where the enemies will be
     this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
     for (let i = 0; i < 30; i += 1) {
       const x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
       const y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+      // parameters are x, y, width, height
       this.spawns.create(x, y, 20, 20);
     }
+    // add collider
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
-  }
+    // we listen for 'wake' event
+    this.sys.events.on('wake', this.wake, this);
+  },
 
+  wake() {
+    this.cursors.left.reset();
+    this.cursors.right.reset();
+    this.cursors.up.reset();
+    this.cursors.down.reset();
+  },
   onMeetEnemy(player, zone) {
+    // we move the zone to some other location
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
+    // shake the world
     this.cameras.main.shake(300);
-  }
 
-  update() {
-  //    this.controls.update(delta);
+    this.input.stopPropagation();
+    // start battle
+    this.scene.switch('BattleScene');
+  },
+
+  update(time, delta) {
     this.player.body.setVelocity(0);
 
     // Horizontal movement
     if (this.cursors.left.isDown) {
       this.player.body.setVelocityX(-80);
-    }
-    else if (this.cursors.right.isDown) {
+    } else if (this.cursors.right.isDown) {
       this.player.body.setVelocityX(80);
     }
-
     // Vertical movement
     if (this.cursors.up.isDown) {
       this.player.body.setVelocityY(-80);
-    }
-    else if (this.cursors.down.isDown) {
+    } else if (this.cursors.down.isDown) {
       this.player.body.setVelocityY(80);
     }
 
@@ -105,26 +133,7 @@ export default class WorldScene extends Phaser.Scene {
     } else {
       this.player.anims.stop();
     }
-  }
-}
-
-const config = {
-  type: Phaser.AUTO,
-  parent: 'content',
-  width: 320,
-  height: 240,
-  zoom: 2,
-  pixelArt: true,
-  physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { y: 0 },
-      debug: false,
-    },
   },
-  scene: [
-    BootScene,
-    WorldScene,
-  ],
-};
-const game = new Phaser.Game(config);
+});
+
+export default WorldScene;

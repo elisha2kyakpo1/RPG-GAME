@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import UiScene from './UiScene';
+import BattleScene from './Scene/BattleScene';
+import WorldScene from './Scene/worldScene';
 import BootScene from './Scene/BootScene';
-import BattleScene from './BattleScene';
-// import UiScene from './UiScene';
+import UIScene from './Scene/UiScene';
 
 const config = {
   type: Phaser.AUTO,
@@ -15,12 +15,14 @@ const config = {
     default: 'arcade',
     arcade: {
       gravity: { y: 0 },
+      debug: false, // set to true to view zones
     },
   },
   scene: [
     BootScene,
+    WorldScene,
     BattleScene,
-    UiScene,
+    UIScene,
   ],
 };
 
