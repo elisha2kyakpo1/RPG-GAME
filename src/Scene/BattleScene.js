@@ -326,7 +326,7 @@ const Menu = new Phaser.Class({
   // recreate the menu items
   remap(units) {
     this.clear();
-    for (let i = 0; i < units.length(); i += 1) {
+    for (let i = 0; i < units.length; i += 1) {
       const unit = units[i];
       unit.setMenuItem(this.addMenuItem(unit.type));
     }
@@ -469,12 +469,12 @@ const UIScene = new Phaser.Class({
   },
 
   remapHeroes() {
-    const { heroes } = this.battleScene.heroes;
+    const { heroes } = this.battleScene;
     this.heroesMenu.remap(heroes);
   },
 
   remapEnemies() {
-    const { enemies } = this.battleScene.enemies;
+    const { enemies } = this.battleScene;
     this.enemiesMenu.remap(enemies);
   },
 

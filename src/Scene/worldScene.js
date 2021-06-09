@@ -18,8 +18,8 @@ const WorldScene = new Phaser.Class({
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
 
     // creating the layers
-    map.createStaticLayer('Grass', tiles, 0, 0);
-    const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
+    map.createLayer('Grass', tiles, 0, 0);
+    const obstacles = map.createLayer('Obstacles', tiles, 0, 0);
 
     // make all tiles in obstacles collidable
     obstacles.setCollisionByExclusion([-1]);
@@ -90,6 +90,7 @@ const WorldScene = new Phaser.Class({
     this.cursors.up.reset();
     this.cursors.down.reset();
   },
+
   onMeetEnemy(player, zone) {
     // we move the zone to some other location
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
