@@ -1,14 +1,9 @@
 import Phaser from 'phaser';
 
-const WorldScene = new Phaser.Class({
-
-  Extends: Phaser.Scene,
-
-  initialize:
-
-    function WorldScene() {
-      Phaser.Scene.call(this, { key: 'WorldScene' });
-    },
+export default class WorldScene extends Phaser.Scene {
+  constructor() {
+    super('WorldScene');
+  }
 
   create() {
     // create the map
@@ -82,14 +77,14 @@ const WorldScene = new Phaser.Class({
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
     // we listen for 'wake' event
     this.sys.events.on('wake', this.wake, this);
-  },
+  }
 
   wake() {
     this.cursors.left.reset();
     this.cursors.right.reset();
     this.cursors.up.reset();
     this.cursors.down.reset();
-  },
+  }
 
   onMeetEnemy(player, zone) {
     // we move the zone to some other location
@@ -102,7 +97,7 @@ const WorldScene = new Phaser.Class({
     this.input.stopPropagation();
     // start battle
     this.scene.switch('BattleScene');
-  },
+  }
 
   update() {
     this.player.body.setVelocity(0);
@@ -134,7 +129,5 @@ const WorldScene = new Phaser.Class({
     } else {
       this.player.anims.stop();
     }
-  },
-});
-
-export default WorldScene;
+  }
+}

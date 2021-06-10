@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import config from './Config/Config';
 import { BattleScene, UIScene } from './Scene/BattleScene';
 import WorldScene from './Scene/worldScene';
 import BootScene from './Scene/BootScene';
@@ -6,34 +7,25 @@ import CreditsScene from './Scene/CreditsScene';
 import TitleScene from './Scene/TitleScene';
 import OptionsScene from './Scene/OptionsScene';
 import LeaderboardScene from './Scene/LeaderBoard';
-import Button from './Buttons';
+import Model from './Model';
 
-const config = {
-  type: Phaser.AUTO,
-  parent: 'content',
-  width: 550,
-  height: 340,
-  zoom: 2,
-  pixelArt: true,
-  physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { y: 0 },
-      debug: true, // set to true to view zones
-    },
-  },
-  scene: [
-    Button,
-    LeaderboardScene,
-    OptionsScene,
-    TitleScene,
-    CreditsScene,
-    BootScene,
-    WorldScene,
-    BattleScene,
-    UIScene,
-  ],
-};
+class Game extends Phaser.Game {
+  constructor() {
+    super(config);
+    this.scene.add('Options', OptionsScene);
+    this.scene.add('WorldScene', WorldScene);
+    this.scene.add('Game', BattleScene);
+    this.scene.add('Boot', BootScene);
+    this.scene.add('Preloader', UIScene);
+    this.scene.add('Title', TitleScene);
+    this.scene.add('Credits', CreditsScene);
+    this.scene.add('LeaderBoard', LeaderboardScene);
+
+    this.scene.start('Boot');
+    const model = new Model();
+    this.globals = { model, bgMusic: null };
+  }
+}
 
 // eslint-disable-next-line no-new
-new Phaser.Game(config);
+window.Game = new Game(config);

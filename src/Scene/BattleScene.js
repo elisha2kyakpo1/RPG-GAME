@@ -101,22 +101,18 @@ const Enemy = new Phaser.Class({
     },
 });
 
-const BattleScene = new Phaser.Class({
+class BattleScene extends Phaser.Scene {
+  constructor() {
+    super('BattleScene');
+  }
 
-  Extends: Phaser.Scene,
-
-  initialize:
-
-    function BattleScene() {
-      Phaser.Scene.call(this, { key: 'BattleScene' });
-    },
   create() {
     // change the background to green
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
     this.startBattle();
     // on wake event we call startBattle too
     this.sys.events.on('wake', this.startBattle, this);
-  },
+  }
 
   startBattle() {
     // player character - warrior
@@ -143,7 +139,7 @@ const BattleScene = new Phaser.Class({
     this.index = -1; // currently active unit
 
     this.scene.run('UIScene');
-  },
+  }
 
   nextTurn() {
     // if we have victory or game over
@@ -175,7 +171,7 @@ const BattleScene = new Phaser.Class({
       // add timer for the next turn, so will have smooth gameplay
       this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
-  },
+  }
 
   // check for game over or victory
   checkEndBattle() {
@@ -194,7 +190,8 @@ const BattleScene = new Phaser.Class({
       }
     }
     return victory || gameOver;
-  },
+  }
+
   // when the player have selected the enemy to be attacked
   receivePlayerSelection(action, target) {
     if (action === 'attack') {
@@ -202,7 +199,7 @@ const BattleScene = new Phaser.Class({
     }
     // next turn in 3 seconds
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
-  },
+  }
 
   endBattle() {
     // clear state, remove sprites
@@ -217,8 +214,8 @@ const BattleScene = new Phaser.Class({
     this.scene.sleep('UIScene');
     // return to WorldScene and sleep current BattleScene
     this.scene.switch('WorldScene');
-  },
-});
+  }
+}
 
 const MenuItem = new Phaser.Class({
   Extends: Phaser.GameObjects.Text,
