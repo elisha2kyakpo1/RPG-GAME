@@ -2,6 +2,11 @@ import Phaser from 'phaser';
 import { BattleScene, UIScene } from './Scene/BattleScene';
 import WorldScene from './Scene/worldScene';
 import BootScene from './Scene/BootScene';
+import CreditsScene from './Scene/CreditsScene';
+import TitleScene from './Scene/TitleScene';
+import OptionsScene from './Scene/OptionsScene';
+import LeaderboardScene from './Scene/LeaderBoard';
+import Button from './Buttons';
 
 const config = {
   type: Phaser.AUTO,
@@ -18,6 +23,11 @@ const config = {
     },
   },
   scene: [
+    Button,
+    LeaderboardScene,
+    OptionsScene,
+    TitleScene,
+    CreditsScene,
     BootScene,
     WorldScene,
     BattleScene,
