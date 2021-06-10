@@ -14,18 +14,18 @@ class Game extends Phaser.Game {
     super(config);
     this.scene.add('Options', OptionsScene);
     this.scene.add('WorldScene', WorldScene);
-    this.scene.add('Game', BattleScene);
-    this.scene.add('Boot', BootScene);
+    this.scene.add('BattleScene', BattleScene);
+    this.scene.add('BootScene', BootScene);
     this.scene.add('Preloader', UIScene);
     this.scene.add('Title', TitleScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('LeaderBoard', LeaderboardScene);
 
-    this.scene.start('Title');
+    this.scene.start('BootScene');
     const model = new Model();
     this.globals = { model, bgMusic: null };
   }
 }
 
 // eslint-disable-next-line no-new
-window.Game = new Game(config);
+window.Game = new Game();
