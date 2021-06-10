@@ -151,6 +151,7 @@ const BattleScene = new Phaser.Class({
       this.endBattle();
       return;
     }
+
     do {
       // currently active unit
       this.index += 1;
