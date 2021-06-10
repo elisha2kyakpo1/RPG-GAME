@@ -21,7 +21,7 @@ class Game extends Phaser.Game {
     this.scene.add('Credits', CreditsScene);
     this.scene.add('LeaderBoard', LeaderboardScene);
 
-    this.scene.start('Boot');
+    this.scene.start('Title');
     const model = new Model();
     this.globals = { model, bgMusic: null };
   }
