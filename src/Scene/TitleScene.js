@@ -7,16 +7,16 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    this.model = this.sys.game.globals.model;
-    if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
-      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
-      this.bgMusic.play();
-      this.model.bgMusicPlaying = true;
-      this.sys.game.globals.bgMusic = this.bgMusic;
-    }
-    this.gameButton = new Button(this, 160, 200, 'btn-default', 'btn-hover', 'Credits', 'Credits');
-    this.gameButton = new Button(this, 160, 50, 'btn-default', 'btn-hover', 'Play', 'Game');
-    this.gameButton = new Button(this, 160, 100, 'btn-default', 'btn-hover', 'Options', 'Options');
-    this.gameButton = new Button(this, 160, 150, 'btn-default', 'btn-hover', 'Scoreboard', 'LeaderBoard');
+    // this.model = this.sys.game.globals.model;
+    // if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
+    //   this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+    //   this.bgMusic.play();
+    //   this.model.bgMusicPlaying = true;
+    //   this.sys.game.globals.bgMusic = this.bgMusic;
+    // }
+    this.gameButton = new Button(this, 160, 50, 'blueButton1', 'blueButton2', 'Play game', 'BattleScene');
+    this.gameButton = new Button(this, 160, 100, 'blueButton1', 'blueButton2', 'Credits', 'CreditsScene');
+    this.gameButton = new Button(this, 160, 150, 'blueButton1', 'blueButton2', 'Options', 'Options');
+    this.gameButton = new Button(this, 160, 200, 'blueButton1', 'blueButton2', 'Scoreboard', 'LeaderBoard');
   }
 }
