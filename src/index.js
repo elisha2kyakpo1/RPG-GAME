@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import config from './Config/Config';
-import { BattleScene, UIScene } from './Scene/BattleScene';
+import BattleScene from './Scene/BattleScene';
 import WorldScene from './Scene/worldScene';
 import BootScene from './Scene/BootScene';
 import CreditsScene from './Scene/CreditsScene';
@@ -17,7 +17,6 @@ class Game extends Phaser.Game {
     this.scene.add('WorldScene', WorldScene);
     this.scene.add('BattleScene', BattleScene);
     this.scene.add('BootScene', BootScene);
-    this.scene.add('UIScene', UIScene);
     this.scene.add('PreLoader', PreloaderScene);
     this.scene.add('Title', TitleScene);
     this.scene.add('Credits', CreditsScene);
