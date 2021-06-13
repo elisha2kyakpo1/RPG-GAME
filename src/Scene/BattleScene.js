@@ -1,7 +1,4 @@
 import Phaser from 'phaser';
-// import topScores from '../GameScores/TopScores';
-// import createBoyAnims from '../anims/Boy';
-// import { Align } from '../util/align';
 
 class BattleScene extends Phaser.Scene {
   constructor() {
@@ -9,34 +6,49 @@ class BattleScene extends Phaser.Scene {
   }
 
   create() {
-    // const board = document.getElementById('score');
-    // board.style.display = 'none';
-    // create the map
     const map = this.make.tilemap({ key: 'map' });
 
-    // first parameter is the name of the tilemap in tiled
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
 
-    // creating the layers
     map.createLayer('Grass', tiles, 0, 0);
     const obstacles = map.createLayer('Obstacles', tiles, 0, 0);
 
-    // make all tiles in obstacles collidable
     obstacles.setCollisionByExclusion([-1]);
 
-    // don't go out of the map
-    this.player = this.physics.add.sprite(50, 100, 'dude', 4).setScale(0.5);
+    this.player = this.physics.add.sprite(50, 100, 'player', 4).setScale(0.5);
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
     this.player.setCollideWorldBounds(true);
 
-    // limit camera to map
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = true;
 
-    // createBoyAnims(this.anims);
-
+    const defaultAnimationFrames = [1, 2, 3, 4, 5, 6];
+    this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('player', { frames: defaultAnimationFrames }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('player', { frames: defaultAnimationFrames }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'up',
+      frames: this.anims.generateFrameNumbers('player', { frames: defaultAnimationFrames }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'down',
+      frames: this.anims.generateFrameNumbers('player', { frames: defaultAnimationFrames }),
+      frameRate: 10,
+      repeat: -1,
+    });
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // don't walk on trees
@@ -108,7 +120,7 @@ class BattleScene extends Phaser.Scene {
 
   collectStar(player, star) {
     star.disableBody(true, true);
-    this.score += 2000;
+    this.score += 100;
     this.scoreText.setText(`Score: ${this.score}`);
   }
 

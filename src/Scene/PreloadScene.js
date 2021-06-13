@@ -88,6 +88,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton1', 'assets/ui/blue_button02.png');
     this.load.image('blueButton2', 'assets/ui/blue_button03.png');
 
+    this.load.image('star', './assets/star.png');
     this.load.image('Logo', './assets/logo.png');
     this.load.image('box', 'assets/ui/grey_box.png');
     this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
@@ -104,7 +105,7 @@ export default class PreloaderScene extends Phaser.Scene {
   ready() {
     this.readyCount += 1;
     if (this.readyCount === 2) {
-      this.scene.start('Title');
+      this.scene.start('Input');
     }
   }
 }

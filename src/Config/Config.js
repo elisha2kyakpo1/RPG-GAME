@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 const config = {
   type: Phaser.AUTO,
   parent: 'content',
-  width: 550,
+  width: 450,
   height: 340,
   zoom: 2,
   pixelArt: true,
@@ -11,7 +11,7 @@ const config = {
     default: 'arcade',
     arcade: {
       gravity: { y: 0 },
-      debug: true, // set to true to view zones
+      debug: false, // set to true to view zones
     },
   },
 };

@@ -18,8 +18,7 @@ const BootScene = new Phaser.Class({
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
 
     // enemies
-    this.load.image('dragonblue', 'assets/dragonblue.png');
-    this.load.image('dragonorrange', 'assets/dragonorrange.png');
+    this.load.image('star', 'assets/star.png');
     this.load.audio('bgMusic', ['assets/Sound/lobby.mp3']);
     this.load.audio('gameMusic', ['assets/Sound/Game.mp3']);
     this.load.audio('jump', ['assets/Sound/jump.wav']);
