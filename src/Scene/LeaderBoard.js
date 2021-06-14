@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import Button from '../Buttons';
+// import topScores from '../GameScores/TopScores';
+// import scoresBoard from '../API/Scores';
 
 export default class LeaderboardScene extends Phaser.Scene {
   init(data) {
@@ -11,12 +13,10 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.text(180, 100, 'Leaderboard', { fontSize: '20px' });
-
-    const board = document.getElementById('score');
-    board.style.display = 'block';
-    board.innerHTML = '';
-    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/')
+    this.add.text(180, 50, 'Leaderboard', { fontSize: '20px' });
+    const MyGameId = 'Zl4d7IVkemOTTVg2fUdz';
+    const baseURL = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${MyGameId}/scores/`;
+    fetch(baseURL)
       .then((res) => res.json())
       .then((res) => {
         const arr = res.result;
@@ -30,20 +30,13 @@ export default class LeaderboardScene extends Phaser.Scene {
           }
         }
         arr.slice(0, 5).forEach((item) => {
-          const div = document.createElement('div');
-          div.style.cssText = `
-          display:flex;
-          justify-content: space-between
-          `;
-          const nameDiv = document.createElement('strong');
-          const scoreDiv = document.createElement('strong');
-          nameDiv.innerHTML = `${item.user} `;
-          scoreDiv.innerHTML = `${item.score}`;
-          div.appendChild(nameDiv);
-          div.appendChild(scoreDiv);
-          board.appendChild(div);
+          this.add.text(100, 100, `1) ${item.user} - ${item.score}`, { fontSize: '20px' });
+          this.add.text(100, 120, `2) ${item.user} - ${item.score}`, { fontSize: '20px' });
+          this.add.text(100, 140, `3) ${item.user} - ${item.score}`, { fontSize: '20px' });
+          this.add.text(100, 160, `4) ${item.user} - ${item.score}`, { fontSize: '20px' });
+          this.add.text(100, 180, `5) ${item.user} - ${item.score}`, { fontSize: '20px' });
         });
       });
-    this.menuButton = new Button(this, 160, 200, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    this.menuButton = new Button(this, 160, 240, 'blueButton1', 'blueButton2', 'Menu', 'Title');
   }
 }

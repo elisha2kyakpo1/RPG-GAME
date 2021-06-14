@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import scoreBoard from '../API/Scores';
 
 let userName;
 let finalScore;
@@ -84,9 +85,9 @@ class BattleScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.gameitems, this.collectStar, null, this);
 
     this.physics.add.collider(this.gameitems, obstacles);
-
+    userName = prompt('Enter your name!');
     finalScore = this.add.text(26, 50, 'finalScore', { fontSize: '20px', fill: '#9f1239' });
-    // finalScore.visible = false;
+    finalScore.visible = false;
   }
 
   update() {
@@ -127,7 +128,9 @@ class BattleScene extends Phaser.Scene {
     star.disableBody(true, true);
     this.score += 100;
     this.scoreText.setText(`Score: ${this.score}`);
-    this.finalScore.setText(`${userName}, your core is: ${this.score}`);
+    finalScore.setText(`${userName}, your core is: ${this.score}`);
+    scoreBoard.postScores(userName, this.score);
+    console.log(`${userName} : ${this.score}`);
   }
 
   endGame(player) {
