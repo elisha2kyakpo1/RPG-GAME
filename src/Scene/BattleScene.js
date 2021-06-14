@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
+import scoreBoard from '../API/Scores';
 
+let userName;
+let finalScore;
 class BattleScene extends Phaser.Scene {
   constructor() {
     super('BattleScene');
@@ -82,6 +85,14 @@ class BattleScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.gameitems, this.collectStar, null, this);
 
     this.physics.add.collider(this.gameitems, obstacles);
+
+    // eslint-disable-next-line no-alert
+    userName = prompt('Please enter your name', 'name');
+    scoreBoard.name(userName);
+    scoreBoard.postScores();
+
+    finalScore = this.add.text(26, 50, 'finalScore', { fontSize: '20px', fill: '#9f1239' });
+    finalScore.visible = false;
   }
 
   update() {
@@ -122,6 +133,7 @@ class BattleScene extends Phaser.Scene {
     star.disableBody(true, true);
     this.score += 100;
     this.scoreText.setText(`Score: ${this.score}`);
+    finalScore.setText(`${userName}, your core is: ${this.score}`);
   }
 
   endGame(player) {
@@ -132,7 +144,7 @@ class BattleScene extends Phaser.Scene {
       delay: 3000,
       loop: false,
       callback: () => {
-        this.scene.start('BootScene');
+        this.scene.start('Title');
       },
     });
   }

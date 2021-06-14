@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { getScores } from '../API/Scores';
+import scoreBoard from '../API/Scores';
 import Button from '../Buttons';
 import topScores from '../GameScores/TopScores';
 
@@ -14,7 +14,7 @@ export default class LeaderboardScene extends Phaser.Scene {
 
   async create() {
     this.add.text(100, 50, 'ScoreBoard', { fontSize: '40px' });
-    this.scores = await getScores();
+    this.scores = await scoreBoard();
     this.topScores = topScores(this.scores.result);
 
     this.add.text(100, 100, `1) ${this.topScores[3].user} - ${this.topScores[3].score}`, { fontSize: '20px' });

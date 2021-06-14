@@ -1,31 +1,45 @@
-const MyGameId = 'Zl4d7IVkemOTTVg2fUdz';
-const baseURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+const scoreBoard = (() => {
+  const MyGameId = 'Zl4d7IVkemOTTVg2fUdz';
+  const baseURL = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${MyGameId}/scores/`;
 
-const getScores = async () => {
-  const gameScoresURL = `${baseURL}games/${MyGameId}/scores`;
+  const info = {};
+  const postScores = () => {
+    if (info.score > 0) {
+      const data = info;
+      fetch(baseURL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(data),
+      }).then((res) => {
+        res.json();
+      }).then((json) => json.result);
+    }
+  };
+  const name = (name) => {
+    info.user = name;
+  };
 
-  const data = await fetch(gameScoresURL);
-  const userScores = await data.json();
-
-  return userScores;
-};
-const postScore = async (userName, userScore, MyGameId) => {
-  const gameScoresURL = `${baseURL}games/${MyGameId}/scores`;
-
-  const res = await fetch(gameScoresURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      user: userName,
-      score: userScore,
-    }),
-
+  const scorer = (num) => {
+    info.score = num;
+  };
+  const getScores = () => new Promise((resolve, reject) => {
+    fetch(baseURL)
+      .then((response) => response.json())
+      .then((json) => {
+        resolve(json.result);
+      }).catch((e) => {
+        reject(e);
+      });
   });
+  return {
+    postScores,
+    getScores,
+    name,
+    scorer,
+  };
+});
 
-  await res.json();
-  return res;
-};
-
-export { getScores, postScore };
+export default scoreBoard();
