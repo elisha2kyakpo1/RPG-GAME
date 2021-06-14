@@ -13,14 +13,10 @@ const BootScene = new Phaser.Class({
   preload() {
     // map tiles
     this.load.image('tiles', 'assets/map/spritesheet.png');
+    this.load.image('Logo', './assets/logo.png');
 
-    // map in json format
     this.load.tilemapTiledJSON('map', 'assets/map/map.json');
-
-    // enemies
     this.load.image('star', 'assets/star.png');
-
-    // our two characters
     this.load.spritesheet('player', 'assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
   },
 

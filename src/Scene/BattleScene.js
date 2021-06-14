@@ -85,6 +85,7 @@ class BattleScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.gameitems, this.collectStar, null, this);
 
     this.physics.add.collider(this.gameitems, obstacles);
+    // eslint-disable-next-line no-alert
     userName = prompt('Enter your name!');
     finalScore = this.add.text(26, 50, 'finalScore', { fontSize: '20px', fill: '#9f1239' });
     finalScore.visible = false;
@@ -130,7 +131,6 @@ class BattleScene extends Phaser.Scene {
     this.scoreText.setText(`Score: ${this.score}`);
     finalScore.setText(`${userName}, your core is: ${this.score}`);
     scoreBoard.postScores(userName, this.score);
-    console.log(`${userName} : ${this.score}`);
   }
 
   endGame(player) {
