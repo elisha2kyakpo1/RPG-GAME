@@ -9,7 +9,7 @@ import OptionsScene from './Scene/OptionsScene';
 import LeaderboardScene from './Scene/LeaderBoard';
 import Model from './Model';
 import PreloaderScene from './Scene/PreloadScene';
-// import InputScene from './Input';
+import InputScene from './Input';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -22,7 +22,7 @@ class Game extends Phaser.Game {
     this.scene.add('Title', TitleScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Leaderboard', LeaderboardScene);
-    // this.scene.add('Input', InputScene);
+    this.scene.add('Input', InputScene);
 
     this.scene.start('BootScene');
     const model = new Model();

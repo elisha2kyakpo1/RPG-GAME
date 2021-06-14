@@ -18,7 +18,7 @@ const scoreBoard = (() => {
       }).then((json) => json.result);
     }
   };
-  const name = (name) => {
+  const names = (name) => {
     info.user = name;
   };
 
@@ -37,7 +37,7 @@ const scoreBoard = (() => {
   return {
     postScores,
     getScores,
-    name,
+    names,
     scorer,
   };
 });

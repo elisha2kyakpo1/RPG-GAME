@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html lang="En">
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>RPG in Phaser 3</title>        
-    <meta name="viewport" content="width=device-width,initial-scale=1"> 
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Hidden Eliens</title>
   </head>
-  <body>
-      <div id="content" ></div>
-      <form action="#" id="login">
-        <input class="user-input" type="text" placeholder="Enter your name!">
-        <input class="submitBtn" type="submit" value="Save">
-      </form>
-      <script src="main.js"></script>
+  <body style="margin:0 auto;  width:800px; position:relative">
+    <form class="flex-column" id="form">
+      <input
+        type="text"
+        placeholder="Write your Evader's name."
+        name="user"
+        id="user"
+        class=""
+      />
+      <input
+        type="button"
+        name="submit"
+        id="submit"
+        value="Submit"
+        class="btn btn-warning text-white"
+      />
+    </form>
+    <div id="score" style="display: none"></div>
+    <div id="error" style="display: none"></div>
+    <script src="main.js"></script>
   </body>
 </html>

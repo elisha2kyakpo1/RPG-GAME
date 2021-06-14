@@ -1,7 +1,5 @@
 import Phaser from 'phaser';
-import scoreBoard from '../API/Scores';
 import Button from '../Buttons';
-import topScores from '../GameScores/TopScores';
 
 export default class LeaderboardScene extends Phaser.Scene {
   init(data) {
@@ -12,15 +10,40 @@ export default class LeaderboardScene extends Phaser.Scene {
     super('Leaderboard');
   }
 
-  async create() {
-    this.add.text(100, 50, 'ScoreBoard', { fontSize: '40px' });
-    this.scores = await scoreBoard();
-    this.topScores = topScores(this.scores.result);
+  create() {
+    this.add.text(180, 100, 'Leaderboard', { fontSize: '20px' });
 
-    this.add.text(100, 100, `1) ${this.topScores[3].user} - ${this.topScores[3].score}`, { fontSize: '20px' });
-    this.add.text(100, 130, `2) ${this.topScores[1].user} - ${this.topScores[1].score}`, { fontSize: '20px' });
-    this.add.text(100, 160, `3) ${this.topScores[2].user} - ${this.topScores[2].score}`, { fontSize: '20px' });
-
-    this.homeButton = new Button(this, 150, 250, 'blueButton1', 'blueButton2', 'Home', 'Title');
+    const board = document.getElementById('score');
+    board.style.display = 'block';
+    board.innerHTML = '';
+    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Zl4d7IVkemOTTVg2fUdz/scores/')
+      .then((res) => res.json())
+      .then((res) => {
+        const arr = res.result;
+        for (let i = 0; i < arr.length; i += 1) {
+          for (let j = 0; j < arr.length - 1; j += 1) {
+            if (arr[j].score < arr[j + 1].score) {
+              const tmp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = tmp;
+            }
+          }
+        }
+        arr.slice(0, 5).forEach((item) => {
+          const div = document.createElement('div');
+          div.style.cssText = `
+          display:flex;
+          justify-content: space-between
+          `;
+          const nameDiv = document.createElement('strong');
+          const scoreDiv = document.createElement('strong');
+          nameDiv.innerHTML = `${item.user} `;
+          scoreDiv.innerHTML = `${item.score}`;
+          div.appendChild(nameDiv);
+          div.appendChild(scoreDiv);
+          board.appendChild(div);
+        });
+      });
+    this.menuButton = new Button(this, 160, 200, 'blueButton1', 'blueButton2', 'Menu', 'Title');
   }
 }
