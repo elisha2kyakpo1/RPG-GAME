@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import scoreBoard from '../API/Scores';
+import { postScores } from '../API/Scores';
 
 let userName;
 let finalScore;
@@ -130,7 +130,7 @@ class BattleScene extends Phaser.Scene {
     this.score += 100;
     this.scoreText.setText(`Score: ${this.score}`);
     finalScore.setText(`${userName}, your core is: ${this.score}`);
-    scoreBoard.postScores(userName, this.score);
+    postScores(userName, this.score);
   }
 
   endGame(player) {
