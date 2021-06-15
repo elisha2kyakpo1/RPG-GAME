@@ -2,7 +2,7 @@
 In this project, I have built a browser game using the phaser game engine. Phaser is an HTML5 game framework that aims to help developers make powerful, cross-browser HTML5 games really quickly. It's a Microverse capstone project, and this time I was required to create a game to put into practice the ES6, Webpack, promises, JSON data, and functional programming. Users can play this game in the browser by using __keyboard arrow keys__.
 
 ## Game design
-The game has two major files, a config file, and a game-scene file, the config file controls the browser window where the game is displayed, this is done either by webGL or HTML canvas element. The BattleScene file controls the game, from the initialization of keyboard controls to the introduction of stars. Click [here](https://github.com/elisha2kyakpo1/RPG-GAME/blob/game-feature/README.md) for more details. 
+The game has two major files, a config file, and a game-scene file, the config file controls the browser window where the game is displayed, this is done either by webGL or HTML canvas element. The BattleScene file controls the game, from the initialization of keyboard controls to the introduction of stars. Click [here](https://github.com/elisha2kyakpo1/RPG-GAME/blob/game-feature/hiddenEliens.md) for more details. 
 
 ![Phaser world!](dist/assets/eliens.png)
 
