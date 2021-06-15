@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
-const width = 500;
-const height = 160;
+const width = 450;
+const height = 340;
 const credits = `
 Created by Elisha k,
 A Microverse student!
@@ -12,8 +12,8 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, credits, { fontSize: '26px', fill: '#fff' });
+    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '25px', fill: '#fff' });
+    this.madeByText = this.add.text(0, 0, credits, { fontSize: '20px', fill: '#fff' });
     this.zone = this.add.zone(width / 2, height / 2, width, height);
 
     Phaser.Display.Align.In.Center(

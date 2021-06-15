@@ -24,6 +24,6 @@ export default class LeaderboardScene extends Phaser.Scene {
     this.add.text(100, 180, `5) ${this.topScores[5].user} - ${this.topScores[5].score}`, { fontSize: '20px' });
     this.add.text(100, 200, `6) ${this.topScores[6].user} - ${this.topScores[6].score}`, { fontSize: '20px' });
 
-    this.homeButton = new Button(this, 100, 250, 'blueButton1', 'blueButton2', 'Home', 'Title');
+    this.homeButton = new Button(this, 120, 250, 'blueButton1', 'blueButton2', 'Home', 'Title');
   }
 }
