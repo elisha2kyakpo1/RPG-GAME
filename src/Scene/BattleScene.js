@@ -7,10 +7,6 @@ class BattleScene extends Phaser.Scene {
   }
 
   create() {
-    // // checking for input
-    // this.input.on('pointerdown', this.jump, this);
-    // this.input.keyboard.on('keydown-SPACE', this.jump, this);
-
     const map = this.make.tilemap({ key: 'map' });
 
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
