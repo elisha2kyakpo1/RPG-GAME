@@ -9,6 +9,7 @@ import OptionsScene from './Scene/OptionsScene';
 import LeaderboardScene from './Scene/LeaderBoard';
 import Model from './Model';
 import PreloaderScene from './Scene/PreloadScene';
+import InputScene from './Scene/InputScene';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -20,6 +21,7 @@ class Game extends Phaser.Game {
     this.scene.add('PreLoader', PreloaderScene);
     this.scene.add('Title', TitleScene);
     this.scene.add('Credits', CreditsScene);
+    this.scene.add('Input', InputScene);
     this.scene.add('Leaderboard', LeaderboardScene);
 
     this.scene.start('BootScene');
@@ -28,5 +30,4 @@ class Game extends Phaser.Game {
   }
 }
 
-// eslint-disable-next-line no-new
-window.Game = new Game();
+window.game = new Game();

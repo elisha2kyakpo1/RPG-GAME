@@ -9,16 +9,9 @@ class BattleScene extends Phaser.Scene {
   }
 
   create() {
-    const form = document.querySelector('form');
-    form.style.display = 'block';
-    const input = document.getElementById('user');
-    const submit = document.getElementById('sub');
-
-    submit.addEventListener('click', () => {
-      if (input.value !== '') {
-        userName = input.value;
-      }
-    });
+    // // checking for input
+    // this.input.on('pointerdown', this.jump, this);
+    // this.input.keyboard.on('keydown-SPACE', this.jump, this);
 
     const map = this.make.tilemap({ key: 'map' });
 
@@ -99,6 +92,8 @@ class BattleScene extends Phaser.Scene {
 
     finalScore = this.add.text(26, 50, 'finalScore', { fontSize: '20px', fill: '#9f1239' });
     finalScore.visible = false;
+
+    // userName = prompt('Enter name');
   }
 
   update() {

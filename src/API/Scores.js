@@ -13,13 +13,23 @@ const postScores = async (name, scores) => {
       score: `${scores}`,
     }),
   });
-  await res.json();
-  return res;
+  const statusPromise = await res.json((response) => {
+    if (response.ok) {
+      return 'Ok';
+    }
+    throw new Error('Something went wrong');
+  });
+  return statusPromise;
 };
 
 const getScores = async () => {
   const data = await fetch(baseURL);
-  const userScores = await data.json();
+  const userScores = await data.json((response) => {
+    if (response.ok) {
+      return 'Ok';
+    }
+    throw new Error('Something went wrong');
+  });
   return userScores;
 };
 

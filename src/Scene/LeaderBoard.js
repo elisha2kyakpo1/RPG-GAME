@@ -14,7 +14,12 @@ export default class LeaderboardScene extends Phaser.Scene {
 
   async create() {
     this.add.text(100, 50, 'Leaderboard', { fontSize: '30px' });
-    this.scores = await getScores();
+    this.scores = await getScores().catch(() => {
+      this.add.text(250, 200, 'Sorry! Something went wrong :( ', {
+        fontSize: '20px',
+        fill: '#000',
+      });
+    });
     this.topScores = topScores(this.scores.result);
 
     this.add.text(100, 100, `1) ${this.topScores[1].user} - ${this.topScores[1].score}`, { fontSize: '20px' });
