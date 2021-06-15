@@ -9,6 +9,17 @@ class BattleScene extends Phaser.Scene {
   }
 
   create() {
+    const form = document.querySelector('form');
+    form.style.display = 'block';
+    const input = document.getElementById('user');
+    const submit = document.getElementById('sub');
+
+    submit.addEventListener('click', () => {
+      if (input.value !== '') {
+        userName = input.value;
+      }
+    });
+
     const map = this.make.tilemap({ key: 'map' });
 
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
@@ -85,8 +96,7 @@ class BattleScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.gameitems, this.collectStar, null, this);
 
     this.physics.add.collider(this.gameitems, obstacles);
-    // eslint-disable-next-line no-alert
-    userName = prompt('Enter your name!');
+
     finalScore = this.add.text(26, 50, 'finalScore', { fontSize: '20px', fill: '#9f1239' });
     finalScore.visible = false;
   }

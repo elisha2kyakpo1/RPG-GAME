@@ -4,9 +4,18 @@
   "description": "A web browser game",
   "main": "webpack.config.js",
   "dependencies": {
+    "jest-fetch-mock": "^3.0.3",
+    "node-fetch": "^2.6.1",
     "phaser": "^3.54.0"
   },
+  "jest": {
+    "automock": false,
+    "setupFiles": [
+      "./setupJest.js"
+    ]
+  },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.28.0",
