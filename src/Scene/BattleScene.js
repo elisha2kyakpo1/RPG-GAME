@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { getScores } from '../API/Scores';
 
 let finalScore;
 class BattleScene extends Phaser.Scene {
@@ -128,6 +129,7 @@ class BattleScene extends Phaser.Scene {
     star.disableBody(true, true);
     this.score += 100;
     this.scoreText.setText(`Score: ${this.score}`);
+    getScores(this.score);
   }
 
   endGame(player) {

@@ -6,7 +6,7 @@ const config = {
   dom: {
     createContainer: true,
   },
-  width: 500,
+  width: 450,
   height: 340,
   zoom: 2,
   pixelArt: true,
