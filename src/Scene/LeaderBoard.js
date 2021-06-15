@@ -4,10 +4,6 @@ import Button from '../Buttons';
 import topScores from '../GameScores/TopScores';
 
 export default class LeaderboardScene extends Phaser.Scene {
-  init(data) {
-    this.score = data.score;
-  }
-
   constructor() {
     super('Leaderboard');
   }

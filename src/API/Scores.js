@@ -9,8 +9,8 @@ const postScores = async (name, scores) => {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      user: `${name}`,
-      score: `${scores}`,
+      user: name,
+      score: scores,
     }),
   });
   const statusPromise = await res.json((response) => {

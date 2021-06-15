@@ -3,7 +3,10 @@ import Phaser from 'phaser';
 const config = {
   type: Phaser.AUTO,
   parent: 'content',
-  width: 450,
+  dom: {
+    createContainer: true,
+  },
+  width: 500,
   height: 340,
   zoom: 2,
   pixelArt: true,

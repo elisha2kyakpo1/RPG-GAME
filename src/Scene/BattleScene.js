@@ -1,7 +1,5 @@
 import Phaser from 'phaser';
-import { postScores } from '../API/Scores';
 
-let userName;
 let finalScore;
 class BattleScene extends Phaser.Scene {
   constructor() {
@@ -134,8 +132,6 @@ class BattleScene extends Phaser.Scene {
     star.disableBody(true, true);
     this.score += 100;
     this.scoreText.setText(`Score: ${this.score}`);
-    finalScore.setText(`${userName}, your core is: ${this.score}`);
-    postScores(userName, this.score);
   }
 
   endGame(player) {
@@ -146,7 +142,7 @@ class BattleScene extends Phaser.Scene {
       delay: 3000,
       loop: false,
       callback: () => {
-        this.scene.start('Title');
+        this.scene.start('Input', this.score);
       },
     });
   }
