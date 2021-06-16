@@ -1,12 +1,12 @@
 import fetchMock from 'jest-fetch-mock';
 import { getScores, postScores } from '../src/API/Scores';
 
-describe('testing api', () => {
+describe('mocking fetch', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
   });
 
-  it('calls google and returns data to me', () => {
+  it('it gets user scores', () => {
     fetchMock.mockResponseOnce(JSON.stringify({ data: 'Elisha', score: 100 }));
 
     getScores().then((res) => {
