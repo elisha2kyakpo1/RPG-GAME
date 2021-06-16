@@ -1,0 +1,56 @@
+{
+  "name": "rpg-game",
+  "version": "1.0.0",
+  "description": "A web browser game",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "phaser": "^3.54.0",
+    "jest-fetch-mock": "^3.0.3"
+  },
+  "jest": {
+    "automock": false,
+    "globals": {
+      "window": {
+        "testEnvironment": "jest-environment-node"
+      }
+    },
+    "setupFiles": [
+      "./setupJest.js",
+      "jest-canvas-mock"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.0.1",
+    "jest-canvas-mock": "^2.3.1",
+    "jest-environment-jsdom-fourteen": "^1.0.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "^3.19.0",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elisha2kyakpo1/phaser3-game.git"
+  },
+  "author": "Elisha kyakopo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elisha2kyakpo1/phaser3-game/issues"
+  },
+  "homepage": "https://github.com/elisha2kyakpo1/phaser3-game#readme"
+}

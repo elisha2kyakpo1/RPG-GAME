@@ -1,0 +1,11 @@
+body {
+
+  margin-left: 500;
+  padding: 0;
+}
+
+#content {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
