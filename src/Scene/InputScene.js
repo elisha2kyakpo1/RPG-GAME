@@ -14,7 +14,7 @@ export default class InputScene extends Phaser.Scene {
     let name = '';
 
     const submitInfo = () => {
-      const test = document.createElement('h4');
+      const test = document.createElement('p');
       name = document.getElementById('name').value;
       if (name.length >= 5) {
         const result = postScores(name, this.score);

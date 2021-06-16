@@ -1,6 +1,8 @@
 const MyGameId = 'Zl4d7IVkemOTTVg2fUdz';
 const baseURL = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${MyGameId}/scores/`;
 
+const fetch = require('node-fetch');
+
 const postScores = async (name, scores) => {
   const res = await fetch(baseURL, {
     method: 'POST',
